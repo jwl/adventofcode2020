@@ -39,16 +39,16 @@ func load_input() []int {
 func main() {
 	fmt.Println("day01-01 started")
 	input := load_input()
-	for i, element := range input {
-		for _, inner_element := range input[i:] {
-			if element+inner_element == 2020 {
-				fmt.Println("The two elements are: ", element, " and ", inner_element)
-				fmt.Println("Their product is: ", element*inner_element)
-
+	for i, e1 := range input {
+		for j, e2 := range input[i:] {
+			for _, e3 := range input[j:] {
+				if e1+e2+e3 == 2020 {
+					fmt.Println("The three elements are: ", e1, ", ", e2, " and ", e3)
+					fmt.Println("Their product is: ", e1*e2*e3)
+					return
+				}
 			}
-
 		}
-
 	}
 	fmt.Println("End of input reached!")
 }

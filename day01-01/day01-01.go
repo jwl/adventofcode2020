@@ -44,11 +44,8 @@ func main() {
 			if element+inner_element == 2020 {
 				fmt.Println("The two elements are: ", element, " and ", inner_element)
 				fmt.Println("Their product is: ", element*inner_element)
-
 			}
-
 		}
-
 	}
 	fmt.Println("End of input reached!")
 }
