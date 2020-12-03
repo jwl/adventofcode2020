@@ -35,7 +35,7 @@ func loadInput() []string {
 	return input
 }
 
-func isTree(treeMapLine string, x int, y int) bool {
+func isTree(treeMapLine string, x int) bool {
 	// returns true if the coordinate (x, y) is a tree on the map
 	length := len(string(treeMapLine))
 
@@ -55,7 +55,7 @@ func getTreesForSlope(treeMap []string, slopeX int, slopeY int) int {
 	 height := len(treeMap)
 
 	 for i := 0; i * slopeY < height; i++ {
-	 	if isTree(treeMap[i * slopeY], i * slopeX, i * slopeY) {
+	 	if isTree(treeMap[i * slopeY], i * slopeX) {
 	 		treesHit++
 	 	}
 	 }
