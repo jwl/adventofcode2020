@@ -76,29 +76,4 @@ func main() {
 	slope5TreesHit := getTreesForSlope(treeMap, 1, 2)
 
 	fmt.Printf("Product of all trees hit on all slopes is %d\n", slope1TreesHit * slope2TreesHit * slope3TreesHit * slope4TreesHit * slope5TreesHit)
-
-	// height := len(treeMap)
-
-	// fmt.Printf("Height of this mountain is: %d\n", height)
-
-	// treesHit := 0
-
-	// slope1 := [1, 1]
-	// slope2 := [3, 1]
-	// slope3 := [5, 1]
-	// slope4 := [7, 1]
-	// slope5 := [1, 2]
-
-	// // slope1
-	// slope1TreesHit := 0
-	// for currentHeight1 := 0; currentHeight1 < height; currentHeight1 = currentHeight1 + slope1[1] {
-
-	// }
-
-	// for y, _ := range treeMap {
-	// 	if isTree(treeMap, (3 * y), y) {
-	// 		treesHit++
-	// 	}
-	// }
-
 }
