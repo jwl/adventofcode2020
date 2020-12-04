@@ -7,7 +7,6 @@ import (
 	"os"
 )
 
-
 func loadInput() []string {
 	path := "input"
 	input := []string{}
@@ -34,7 +33,6 @@ func loadInput() []string {
 	return input
 }
 
-
 func isTree(treeMapLine string, x int) bool {
 	// returns true if the coordinate (x, y) is a tree on the map
 	length := len(string(treeMapLine))
@@ -49,7 +47,6 @@ func isTree(treeMapLine string, x int) bool {
 
 }
 
-
 func main() {
 	fmt.Println("day03-01 started")
 	treeMap := loadInput()
@@ -60,7 +57,7 @@ func main() {
 
 	treesHit := 0
 
-	for y, _ := range treeMap {
+	for y := range treeMap {
 		if isTree(treeMap[y], (3 * y)) {
 			treesHit++
 		}
