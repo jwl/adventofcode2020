@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"regexp"
 	"strings"
-	"io/ioutil"
 )
-
 
 func loadInput(filename string) string {
 	b, err := ioutil.ReadFile(filename)
@@ -17,13 +16,11 @@ func loadInput(filename string) string {
 	return string(b)
 }
 
-
 func splitPassports(rawString string) []string {
 	// Takes a giant string and splits into a list of passports
 	passportList := strings.Split(rawString, "\n\n")
 	return passportList
 }
-
 
 func validatePassports(passportList []string) int {
 	// Returns number of valid passports in passportList
@@ -36,7 +33,6 @@ func validatePassports(passportList []string) int {
 
 	return validPassports
 }
-
 
 func validatePassport(rawPassport string) bool {
 	// A valid passport must have:
@@ -54,7 +50,6 @@ func validatePassport(rawPassport string) bool {
 	return true
 }
 
-
 func containsField(targetField string, passport []string) bool {
 	for _, entry := range passport {
 		if targetField == entry[0:3] {
@@ -64,7 +59,7 @@ func containsField(targetField string, passport []string) bool {
 	return false
 }
 
-func containsValidField(targetField string, passport[]string) bool {
+func containsValidField(targetField string, passport []string) bool {
 	rules := make(map[string]string)
 	rules["byr"] = `\b19[2-9]\d\b|\b200[0-2]\b`
 	rules["iyr"] = `\b201\d\b|\b2020\b`
@@ -85,7 +80,6 @@ func containsValidField(targetField string, passport[]string) bool {
 
 	return false
 }
-
 
 func main() {
 	fmt.Println("day04-02 started")
