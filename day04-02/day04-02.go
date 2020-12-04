@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 	"io/ioutil"
 )
@@ -45,8 +46,7 @@ func validatePassport(rawPassport string) bool {
 	passport := strings.Fields(rawPassport)
 
 	for _, field := range requiredFields {
-		if !containsField(field, passport) {
-			fmt.Printf("Field <%s> is missing from passport <%v>\n", field, passport)
+		if !containsValidField(field, passport) {
 			return false
 		}
 	}
@@ -64,9 +64,31 @@ func containsField(targetField string, passport []string) bool {
 	return false
 }
 
+func containsValidField(targetField string, passport[]string) bool {
+	rules := make(map[string]string)
+	rules["byr"] = `\b19[2-9]\d\b|\b200[0-2]\b`
+	rules["iyr"] = `\b201\d\b|\b2020\b`
+	rules["eyr"] = `\b202\d\b|\b2030\b`
+	rules["hgt"] = `\b(1[5-8]\d|19[0-3])cm\b|\b(59|6\d|7[0-6])in\b`
+	rules["hcl"] = `#[\da-f]{6}\b`
+	rules["ecl"] = `\b(amb|blu|brn|gry|grn|hzl|oth)\b`
+	rules["pid"] = `\b\d{9}\b`
+
+	for _, entry := range passport {
+		if targetField == entry[0:3] {
+			// entry[4:] is the value of the field
+
+			match, _ := regexp.MatchString(rules[targetField], entry[4:])
+			return match
+		}
+	}
+
+	return false
+}
+
 
 func main() {
-	fmt.Println("day04-01 started")
+	fmt.Println("day04-02 started")
 	rawPassportList := loadInput("input")
 	passportList := splitPassports(rawPassportList)
 	validPassports := validatePassports(passportList)
