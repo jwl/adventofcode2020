@@ -35,7 +35,6 @@ func loadInput(filename string) []string {
 }
 
 func getHighestSeatID(boardingPassList []string) int {
-	// iterate through each boardingpass, calculate its seat ID
 	highestSeatID := 0
 	seatID := -1
 	for _, rawBoardingPass := range boardingPassList {
@@ -48,7 +47,6 @@ func getHighestSeatID(boardingPassList []string) int {
 }
 
 func getLowestSeatID(boardingPassList []string) int {
-	// iterate through each boardingpass, calculate its seat ID
 	lowestSeatID := 9999999
 	seatID := -1
 	for _, rawBoardingPass := range boardingPassList {
