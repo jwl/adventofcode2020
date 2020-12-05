@@ -34,32 +34,12 @@ func loadInput(filename string) []string {
 	return input
 }
 
-func convertRowToDecimal(rowString string) int {
-	binaryString := strings.ReplaceAll(rowString, "F", "0")
-	binaryString = strings.ReplaceAll(binaryString, "B", "1")
-	result, _ := strconv.ParseInt(binaryString, 2, 64)
-
-	return int(result)
-}
-
-func convertColumnToDecimal(colString string) int {
-	binaryString := strings.ReplaceAll(colString, "L", "0")
-	binaryString = strings.ReplaceAll(binaryString, "R", "1")
-	result, _ := strconv.ParseInt(binaryString, 2, 64)
-
-	return int(result)
-}
-
-func calcSeatID(row int, col int) int {
-	return row*8 + col
-}
-
 func getHighestSeatID(boardingPassList []string) int {
 	// iterate through each boardingpass, calculate its seat ID
 	highestSeatID := 0
 	seatID := -1
 	for _, rawBoardingPass := range boardingPassList {
-		seatID = calcSeatID(convertRowToDecimal(rawBoardingPass[:7]), convertColumnToDecimal(rawBoardingPass[7:]))
+		seatID = convertBoardingPassToDecimal(rawBoardingPass)
 		if seatID > highestSeatID {
 			highestSeatID = seatID
 		}
@@ -67,17 +47,57 @@ func getHighestSeatID(boardingPassList []string) int {
 	return highestSeatID
 }
 
+func getLowestSeatID(boardingPassList []string) int {
+	// iterate through each boardingpass, calculate its seat ID
+	lowestSeatID := 9999999
+	seatID := -1
+	for _, rawBoardingPass := range boardingPassList {
+		seatID = convertBoardingPassToDecimal(rawBoardingPass)
+		if seatID < lowestSeatID {
+			lowestSeatID = seatID
+		}
+	}
+	return lowestSeatID
+}
+
+func getMissingSeatID(boardingPassList []string) int {
+	highestSeatID := getHighestSeatID(boardingPassList)
+	lowestSeatID := getLowestSeatID(boardingPassList)
+
+	theoreticalSum := getSum(highestSeatID) - getSum(lowestSeatID-1)
+	actualSum := 0
+
+	for _, boardingPass := range boardingPassList {
+		fmt.Printf("%d\n", convertBoardingPassToDecimal(boardingPass))
+		actualSum += convertBoardingPassToDecimal(boardingPass)
+	}
+
+	return theoreticalSum - actualSum
+}
+
+func getSum(x int) int {
+	var sum int
+	for i := 0; i <= x; i++ {
+		sum += i
+	}
+	return sum
+}
+
+func convertBoardingPassToDecimal(boardingPass string) int {
+	// Every boarding pass is just a binary number with F's and L's as 0's and B's and R's as 1's.
+	binaryString := strings.ReplaceAll(boardingPass, "F", "0")
+	binaryString = strings.ReplaceAll(binaryString, "B", "1")
+	binaryString = strings.ReplaceAll(binaryString, "L", "0")
+	binaryString = strings.ReplaceAll(binaryString, "R", "1")
+
+	result, _ := strconv.ParseInt(binaryString, 2, 64)
+
+	return int(result)
+}
+
 func main() {
-	// f = 0, b = 1
 	fmt.Println("day05-02 started")
 	boardingPasses := loadInput("input")
-
-	// fmt.Printf("boardingPasses: %#v\n", boardingPasses)
-
-	highestSeatID := getHighestSeatID(boardingPasses)
-
-	fmt.Printf("highest seat ID is: %d\n", highestSeatID)
-
-	// fmt.Printf("test FBFBBFF should be 44: %d\n", convertToDecimal("FBFBBFF"))
+	fmt.Printf("Missing seatID is: %d\n", getMissingSeatID(boardingPasses))
 
 }
