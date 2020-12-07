@@ -54,5 +54,6 @@ func splitByNewlines(rawString string) []string {
 }
 
 func main() {
+
 	fmt.Println("day06-01 started")
 }
