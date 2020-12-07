@@ -85,7 +85,6 @@ func removeDuplicates(elements []string) []string {
 func getImmediateContainers(bagRules []string, bagType string) []string {
 	immediateContainers := []string{}
 	for _, rule := range bagRules {
-		// fmt.Printf("in getImmediateContainers, looking at rule <%s> for bagtype <%s>\n", rule, bagType)
 		if containsTarget(rule, bagType) {
 			immediateContainers = append(immediateContainers, getHolderType(rule))
 		}
