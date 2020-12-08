@@ -88,10 +88,10 @@ func execute(s state, lines []string) int {
 
 		// check if the next instruction is one we've already done
 		if contains(s.history, s.current) {
-			fmt.Printf("Hit an infinite loop! state is: %#v\n", s)
+			// fmt.Printf("Hit an infinite loop! state is: %#v\n", s)
 			return -1
 		} else if s.current >= len(lines) {
-			fmt.Printf("Reached the end of the program! state is: %#v\n", s)
+			// fmt.Printf("Reached the end of the program! state is: %#v\n", s)
 			return s.accumulator
 		}
 	}
@@ -108,13 +108,11 @@ func modifyInstructions(original []string, i int, newInstruction string) []strin
 
 func iterateProgram(lines []string) {
 	for i, line := range lines {
-		fmt.Printf("original lines are: %#v\n", lines)
-		fmt.Printf("Checking line %d\n", i)
 		if getInstruction(line) == "nop" {
 			modifiedLines := modifyInstructions(lines, i, "jmp")
 			accumulatorValue := execute(state{[]int{}, 0, 0}, modifiedLines)
 			if accumulatorValue > 0 {
-				fmt.Printf("Found successful modification! Change is at line %d and accumulator value is %d\n", i, accumulatorValue)
+				fmt.Printf("Found successful modification! Change is at line %d and accumulator value is %d\n", i+1, accumulatorValue)
 				return
 			} else {
 				lines = modifyInstructions(lines, i, "nop")
@@ -123,7 +121,7 @@ func iterateProgram(lines []string) {
 			modifiedLines := modifyInstructions(lines, i, "nop")
 			accumulatorValue := execute(state{[]int{}, 0, 0}, modifiedLines)
 			if accumulatorValue > 0 {
-				fmt.Printf("Found successful modification! Change is at line %d and accumulator value is %d\n", i, accumulatorValue)
+				fmt.Printf("Found successful modification! Change is at line %d and accumulator value is %d\n", i+1, accumulatorValue)
 				return
 			} else {
 				lines = modifyInstructions(lines, i, "jmp")
