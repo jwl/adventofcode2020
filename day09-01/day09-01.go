@@ -46,7 +46,6 @@ func duplicateSlice(src []int) []int {
 }
 
 func isValidSet(list []int, frameSize int) bool {
-	// fmt.Printf("with frameSize %d, target is: %d, checking set: %#v\n", frameSize, list[len(list)-1], list[:len(list)-1])
 	target := list[len(list)-1]
 	set := list[:len(list)-1]
 
@@ -90,11 +89,14 @@ func getSumOfSmallestLargest(slice []int) int {
 }
 
 func findEncryptionWeakness(invalidNumber int, input []int) int {
+	fmt.Printf("Finding encryption weakness with invalidNumber: %d\n", invalidNumber)
 	for i := range input {
-		for j := range input[i+1:] {
+		j := i + 1
+		for j < len(input) {
 			if getSumOfSlice(input[i:j]) == invalidNumber {
 				return getSumOfSmallestLargest(input[i:j])
 			}
+			j++
 		}
 	}
 	// couldn't find a solution...
@@ -103,9 +105,9 @@ func findEncryptionWeakness(invalidNumber int, input []int) int {
 
 func main() {
 	fmt.Println("day09-01 started")
-	input := loadInputIntoListOfStrings("sample_input")
+	input := loadInputIntoListOfStrings("input")
 
-	frameSize := 5
+	frameSize := 25
 	maxIndex := len(input) - 1
 	foundInvalidSet := false
 	i := frameSize
@@ -125,7 +127,7 @@ func main() {
 
 	if foundInvalidSet {
 		fmt.Printf("Found invalid set at index %d, which has a value of %d\n", i, input[i])
-		// findEncryptionWeakness(i, input)
+		fmt.Printf("Encryption weakness is: %d\n", findEncryptionWeakness(input[i], input))
 	} else {
 		fmt.Printf("Couldn't find an invalid set...\n")
 	}
