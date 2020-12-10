@@ -35,6 +35,7 @@ func loadInputIntoListOfStrings(filename string) []int {
 }
 
 func remove(s []int, i int) []int {
+	// return a slice with the element at index i removed
 	s[len(s)-1], s[i] = s[i], s[len(s)-1]
 	return s[:len(s)-1]
 }
