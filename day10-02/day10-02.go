@@ -71,25 +71,21 @@ func getNumberOfPaths(src int, target int, list []int) int {
 	if isPathBetween(src, src+1, list) {
 		if lookupTable[src+1] == 0 {
 			lookupTable[src+1] = getNumberOfPaths(src+1, target, list)
-			fmt.Printf("lookupTable[%d] is: %d\n", src+1, lookupTable[src+1])
 		}
 		paths += lookupTable[src+1]
 	}
 	if isPathBetween(src, src+2, list) {
 		if lookupTable[src+2] == 0 {
 			lookupTable[src+2] = getNumberOfPaths(src+2, target, list)
-			fmt.Printf("lookupTable[%d] is: %d\n", src+2, lookupTable[src+2])
 		}
 		paths += lookupTable[src+2]
 	}
 	if isPathBetween(src, src+3, list) {
 		if lookupTable[src+3] == 0 {
 			lookupTable[src+3] = getNumberOfPaths(src+3, target, list)
-			fmt.Printf("lookupTable[%d] is: %d\n", src+3, lookupTable[src+3])
 		}
 		paths += lookupTable[src+3]
 	}
-	fmt.Printf("From src %d to target %d, number of paths is %d\n", src, target, paths)
 	return paths
 }
 
