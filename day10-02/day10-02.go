@@ -37,30 +37,6 @@ func loadInputIntoListOfStrings(filename string) []int {
 	return input
 }
 
-func duplicateSlice(src []int) []int {
-	tmp := make([]int, len(src))
-	copy(tmp, src)
-	return tmp
-}
-
-func findNextHighestByN(x int, n int, list []int) int {
-	// returns index of element that is exactly n higher than x if it exists
-	// if such an element doesn't exist, return -1
-	for i, element := range list {
-		if element == x+n {
-			return i
-		}
-	}
-
-	return -1
-}
-
-func remove(s []int, i int) []int {
-	// return a slice with the element at index i removed
-	s[len(s)-1], s[i] = s[i], s[len(s)-1]
-	return s[:len(s)-1]
-}
-
 func getLargestElement(list []int) int {
 	largest := list[0]
 	for i := 0; i < len(list); i++ {
@@ -121,7 +97,6 @@ func main() {
 	fmt.Println("day10-02 started")
 	input := loadInputIntoListOfStrings("input")
 	max := getLargestElement(input)
-	// input = append(input, max)
 	input = append(input, 0)
 	sort.Ints(input)
 	lookupTable = make(map[int]int)
