@@ -32,10 +32,10 @@ func loadInputIntoListOfStrings(filename string) []string {
 	return input
 }
 
-func hasVisibleNbrInDirection(floorPlan []string, x int, y int, dirX int, dirY int) bool {
+func hasVisibleNbrInDirection(floorPlan []string, x int, y int, dx int, dy int) bool {
 	newX, newY := x, y
-	newX += dirX
-	newY += dirY
+	newX += dx
+	newY += dy
 
 	for newY >= 0 && newX >= 0 && newY < len(floorPlan) && newX < len(floorPlan[y]) {
 		if string(floorPlan[newY][newX]) == "#" {
@@ -43,69 +43,48 @@ func hasVisibleNbrInDirection(floorPlan []string, x int, y int, dirX int, dirY i
 		} else if string(floorPlan[newY][newX]) == "L" {
 			return false
 		}
-		newX += dirX
-		newY += dirY
+		newX += dx
+		newY += dy
 	}
 
 	return false
 }
 
 func getNumberOfVisibleNeighbors(floorPlan []string, x int, y int) int {
-	// debug := false
-	// if x == 3 && y == 1 {
-	// 	debug = true
-	// }
-
 	visNbrs := 0
 
 	// top left
 	if hasVisibleNbrInDirection(floorPlan, x, y, -1, -1) {
-		// fmt.Println("top left seen")
 		visNbrs++
 	}
-
 	// top middle
 	if hasVisibleNbrInDirection(floorPlan, x, y, 0, -1) {
-		// fmt.Println("top middle seen")
 		visNbrs++
 	}
-
 	// top right
 	if hasVisibleNbrInDirection(floorPlan, x, y, 1, -1) {
-		// fmt.Println("top right seen")
 		visNbrs++
 	}
-
 	// middle left
 	if hasVisibleNbrInDirection(floorPlan, x, y, -1, 0) {
-		// fmt.Println("middle left seen")
 		visNbrs++
 	}
-
 	// middle right
 	if hasVisibleNbrInDirection(floorPlan, x, y, 1, 0) {
-		// fmt.Println("middle right seen")
 		visNbrs++
 	}
-
 	// bottom left
 	if hasVisibleNbrInDirection(floorPlan, x, y, -1, 1) {
-		// fmt.Println("bottom left seen")
 		visNbrs++
 	}
-
 	// bottom middle
 	if hasVisibleNbrInDirection(floorPlan, x, y, 0, 1) {
-		// fmt.Println("bottom middle seen")
 		visNbrs++
 	}
-
 	// bottom right
 	if hasVisibleNbrInDirection(floorPlan, x, y, 1, 1) {
-		// fmt.Println("bottom right seen")
 		visNbrs++
 	}
-
 	return visNbrs
 }
 
@@ -179,35 +158,17 @@ func partTwo(floorPlan []string) int {
 	// then returns the number of occupied seats
 	iteration := 1
 	newPlan := getNextStateAll(floorPlan)
-	// fmt.Printf("at iteration %d, state is:\n", iteration)
 	oldPlan := duplicateSlice(floorPlan)
 	for !areTwoPlansEqual(newPlan, oldPlan) {
-		// copy(oldPlan, newPlan)
 		oldPlan = duplicateSlice(newPlan)
 		newPlan = getNextStateAll(newPlan)
 		iteration++
-		// fmt.Printf("at iteration %d, state is:\n", iteration)
-		// printFloorPlan(newPlan)
 	}
-	// fmt.Printf("at iteration %d, state has stabilized:\n", iteration)
-	// printFloorPlan(newPlan)
 	return countAllOccupiedStates(newPlan)
 }
 
 func main() {
 	fmt.Println("day11-01 started")
 	floorPlan := loadInputIntoListOfStrings("input")
-	// test8Seen := loadInputIntoListOfStrings("test_8_occupied_seen")
-	// testNoneSeen := loadInputIntoListOfStrings("test_no_occupied_seen")
-	// testEmptyBlocking := loadInputIntoListOfStrings("test_empty_blocking")
-	// fmt.Printf("floorPlan is: \n")
-	// printFloorPlan(floorPlan)
-	// fmt.Printf("After one iteration, the floor plan is now:\n")
-	// printFloorPlan(getNextStateAll(floorPlan))
-	// fmt.Printf("At initial state, floorplan is: \n")
-	// printFloorPlan(floorPlan)
 	fmt.Printf("number of occupied seats after floorPlan states have stabilized is: %d\n", partTwo(floorPlan))
-	// fmt.Printf("seat at position <1,1> would see 0 occupied seats: getNumberOfVisibleNeighbors: %d\n", getNumberOfVisibleNeighbors(testEmptyBlocking, 1, 1))
-	// fmt.Printf("seat at position <3,4> would see 8 occupied seats: getNumberOfVisibleNeighbors: %d\n", getNumberOfVisibleNeighbors(test8Seen, 3, 4))
-	// fmt.Printf("seat at position <3,3> would see 0 occupied seats: getNumberOfVisibleNeighbors: %d\n", getNumberOfVisibleNeighbors(testNoneSeen, 3, 3))
 }
