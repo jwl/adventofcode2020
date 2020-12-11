@@ -96,7 +96,6 @@ func main() {
 	input = append(input, 0)
 	sort.Ints(input)
 	lookupTable = make(map[int]int)
-	fmt.Printf("input is now: %#v\n", input)
 	arrangements := getNumberOfPaths(0, max+3, input)
 	fmt.Printf("Number of arrangements is: %d\n", arrangements)
 
