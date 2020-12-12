@@ -73,13 +73,7 @@ func partOne(input []string) int {
 func main() {
 	fmt.Println("day12-01 started")
 
-	// input := []int{1, 2, 3}
-	// fmt.Printf("input contains 3: %#v", aocutils.Contains(input, 3))
-
 	input := aocutils.LoadInputIntoListOfStrings("input")
 
 	fmt.Printf("Manhattan distance is: %d\n", partOne(input))
-
-	// testState := state{0, 0, 0}
-	// fmt.Printf("getNextState is: %#v\n", getNextState(testState, "N10"))
 }
