@@ -13,6 +13,14 @@ func DuplicateSlice(src []string) []string {
 	return tmp
 }
 
+// Abs returns the absolute value of x.
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
 // LoadInputIntoListOfStrings takes a filename, reads it
 // and returns it as a slice of strings, one per line.
 func LoadInputIntoListOfStrings(filename string) []string {
