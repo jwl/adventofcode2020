@@ -89,3 +89,14 @@ func GetLargestElement(list []int) int {
 	}
 	return largest
 }
+
+// GetLargestElement64 returns the index and value of the largest element in list.
+func GetLargestElement64(list []int64) int64 {
+	largest := list[0]
+	for i := 0; i < len(list); i++ {
+		if list[i] > largest {
+			largest = list[i]
+		}
+	}
+	return largest
+}
