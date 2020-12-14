@@ -68,7 +68,6 @@ func partOne(input []string) {
 			address, _ := strconv.Atoi(match[1])
 			value, _ := strconv.Atoi(match[2])
 			writeToMemory(memory, address, value, bitmask)
-			// fmt.Printf("memory is now: %#v\n", memory)
 		}
 	}
 
@@ -85,13 +84,4 @@ func main() {
 	// main
 	input := aocutils.LoadInputIntoListOfStrings("input")
 	partOne(input)
-
-	// test applyBitMask
-	// value:  000000000000000000000000000000001011  (decimal 11)
-	// mask:   XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
-	// result: 000000000000000000000000000001001001  (decimal 73)
-	// fmt.Printf("test applyBitMask: %d\n", applyBitMask(
-	// 	"000000000000000000000000000000001011",
-	// 	"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X"))
-
 }

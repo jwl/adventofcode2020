@@ -100,3 +100,10 @@ func GetLargestElement64(list []int64) int64 {
 	}
 	return largest
 }
+
+// ReplaceAtIndex returns a string where in[i] has been replaced with r
+func ReplaceAtIndex(in string, r rune, i int) string {
+	out := []rune(in)
+	out[i] = r
+	return string(out)
+}
