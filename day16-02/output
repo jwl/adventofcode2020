@@ -1,0 +1,23 @@
+day16-01 started
+beginning partTwo...
+	len(fields): 0, usedNames: []string{}
+	 Checking: map[string]int{"class":0} ... INVALID
+	 Checking: map[string]int{"class":1} ... GOOD!
+	len(fields): 1, usedNames: []string{"class"}
+	 Checking: map[string]int{"class":1, "row":0} ... GOOD!
+	len(fields): 2, usedNames: []string{"class", "row"}
+	 Checking: map[string]int{"class":1, "row":0, "seat":0} ... INVALID
+	 Checking: map[string]int{"class":1, "row":0, "seat":1} ... INVALID
+	 Checking: map[string]int{"class":1, "row":0, "seat":2} ... GOOD!
+	len(fields): 3, usedNames: []string{"class", "row", "seat"}
+	 Checking: map[string]int{"class":1, "row":0, "seat":0} ... INVALID
+	 Checking: map[string]int{"class":1, "row":0, "seat":1} ... INVALID
+	 Checking: map[string]int{"class":1, "row":0, "seat":2} ... GOOD!
+	len(fields): 3, usedNames: []string{"class", "row", "seat"}
+	 Checking: map[string]int{"class":1, "row":0, "seat":2} ... GOOD!
+	len(fields): 3, usedNames: []string{"class", "row"}
+	 Checking: map[string]int{"class":1, "row":0, "seat":0} ... INVALID
+	 Checking: map[string]int{"class":1, "row":0, "seat":1} ... INVALID
+	 Checking: map[string]int{"class":1, "row":0, "seat":2} ... GOOD!
+	len(fields): 3, usedNames: []string{"class", "row", "seat"}
+Product of the 6 departure field values: 1

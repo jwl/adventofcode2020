@@ -81,13 +81,34 @@ func partOne(input []string) int {
 	fmt.Printf("nearbyTickets are: %#v\n", nearbyTickets)
 
 	ticketScanningErrorRate := 0
+	validTickets := [][]int{}
 	for _, ticket := range nearbyTickets {
+		validTicketFlag := true
+
 		for _, num := range ticket {
 			if !isNumberValid(rules, num) {
 				fmt.Printf("found invalid num %d in ticket: %#v\n", num, ticket)
 				ticketScanningErrorRate += num
+				validTicketFlag = false
+				break
 			}
 		}
+
+		if validTicketFlag {
+			validTickets = append(validTickets, ticket)
+		}
+	}
+
+	fmt.Printf("List of valid tickets is:\n")
+	for _, vTicket := range validTickets {
+		for i, num := range vTicket {
+			fmt.Printf("%d", num)
+			if i < len(vTicket)-1 {
+				fmt.Printf(",")
+			}
+		}
+		fmt.Println()
+		// fmt.Println(vTicket)
 	}
 
 	fmt.Printf("ticketScanningErrorRate is: %d\n", ticketScanningErrorRate)
@@ -97,7 +118,7 @@ func partOne(input []string) int {
 func main() {
 	fmt.Println("day16-01 started")
 
-	input := aocutils.LoadInputIntoListOfStrings("input")
+	input := aocutils.LoadInputIntoListOfStrings("sample1")
 
 	fmt.Printf("Ticket scanning error rate is: %d\n", partOne(input))
 }

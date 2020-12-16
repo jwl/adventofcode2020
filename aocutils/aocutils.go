@@ -73,6 +73,16 @@ func Contains(s []int, e int) bool {
 	return false
 }
 
+// ContainsString returns whether slice contains the string val.
+func ContainsString(slice []string, val string) bool {
+	for _, item := range slice {
+		if item == val {
+			return true
+		}
+	}
+	return false
+}
+
 // Remove returns a slice with the element at index i removed.
 func Remove(s []int, i int) []int {
 	s[len(s)-1], s[i] = s[i], s[len(s)-1]
